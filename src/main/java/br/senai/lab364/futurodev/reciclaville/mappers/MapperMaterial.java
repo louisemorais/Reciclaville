@@ -2,12 +2,17 @@ package br.senai.lab364.futurodev.reciclaville.mappers;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.RequestMaterialDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.ResponseMaterialDTO;
+import br.senai.lab364.futurodev.reciclaville.models.Declaration;
 import br.senai.lab364.futurodev.reciclaville.models.Material;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapperMaterial {
 
-    Material toEntity(Material entity, RequestMaterialDTO request);
-    ResponseMaterialDTO responsedto(Material entity);
+    Material toEntity(@MappingTarget Material entity, RequestMaterialDTO request );
+    ResponseMaterialDTO toResponseDTO(Declaration entity);
+    List<ResponseMaterialDTO> toResponseDTO(List<Material> entities);
 }
