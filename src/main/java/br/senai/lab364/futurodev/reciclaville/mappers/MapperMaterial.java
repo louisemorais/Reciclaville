@@ -13,6 +13,6 @@ import java.util.List;
 public interface MapperMaterial {
 
     Material toEntity(@MappingTarget Material entity, RequestMaterialDTO request );
-    ResponseMaterialDTO toResponseDTO(Declaration entity);
+    ResponseMaterialDTO toResponseDTO(Material entity);
     List<ResponseMaterialDTO> toResponseDTO(List<Material> entities);
 }

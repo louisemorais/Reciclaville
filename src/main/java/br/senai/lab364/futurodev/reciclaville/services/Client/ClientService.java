@@ -5,6 +5,7 @@ import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperClient;
 import br.senai.lab364.futurodev.reciclaville.models.Client;
 import br.senai.lab364.futurodev.reciclaville.repositories.ClientRepository;
+import br.senai.lab364.futurodev.reciclaville.services.Client.ClientServiceInterf;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,6 @@ public class ClientService implements ClientServiceInterf {
     public ResponseClientDTO update(Long id, RequestClientDTO dto) {
         Client client = repository.findById(id).orElse(null);
         clientMapper.toEntity(client, dto);
-        assert client != null;
         return clientMapper.toResponseDTO(repository.save(client));
     }
 

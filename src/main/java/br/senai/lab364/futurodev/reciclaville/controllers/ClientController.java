@@ -3,7 +3,7 @@ package br.senai.lab364.futurodev.reciclaville.controllers;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
-import br.senai.lab364.futurodev.reciclaville.services.ClientService;
+import br.senai.lab364.futurodev.reciclaville.services.Client.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
