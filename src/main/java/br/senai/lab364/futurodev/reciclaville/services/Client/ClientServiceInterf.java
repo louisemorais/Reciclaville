@@ -1,4 +1,4 @@
-package br.senai.lab364.futurodev.reciclaville.services;
+package br.senai.lab364.futurodev.reciclaville.services.Client;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;

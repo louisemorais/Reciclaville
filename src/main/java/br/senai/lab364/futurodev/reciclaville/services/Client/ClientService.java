@@ -1,11 +1,10 @@
-package br.senai.lab364.futurodev.reciclaville.services;
+package br.senai.lab364.futurodev.reciclaville.services.Client;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperClient;
 import br.senai.lab364.futurodev.reciclaville.models.Client;
 import br.senai.lab364.futurodev.reciclaville.repositories.ClientRepository;
-import br.senai.lab364.futurodev.reciclaville.services.Client.ClientServiceInterf;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
