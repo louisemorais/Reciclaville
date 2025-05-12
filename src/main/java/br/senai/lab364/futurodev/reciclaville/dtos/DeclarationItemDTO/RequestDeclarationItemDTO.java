@@ -4,8 +4,7 @@ import br.senai.lab364.futurodev.reciclaville.models.Declaration;
 import br.senai.lab364.futurodev.reciclaville.models.Material;
 
 
-public record RequestDeclarationItemDTO(Declaration declaration,
-                                        Material material,
+public record RequestDeclarationItemDTO(Material material,
                                         double percentage,
                                         double tonsDeclared,
                                         double tonsCompensation) {

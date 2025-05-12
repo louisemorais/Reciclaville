@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -34,4 +35,7 @@ public class Declaration {
 
     @Column
     private double compensationTotal;
+
+    @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeclarationItem> itens;
 }

@@ -18,9 +18,11 @@ public class DeclarationItem {
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "declaration_id")
     private Declaration declaration;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "material_id")
     private Material material;
 
     @Column(nullable = false)

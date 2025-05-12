@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapperMaterial {
-
     Material toEntity(@MappingTarget Material entity, RequestMaterialDTO request );
     ResponseMaterialDTO toResponseDTO(Material entity);
     List<ResponseMaterialDTO> toResponseDTO(List<Material> entities);
