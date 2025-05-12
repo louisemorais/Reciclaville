@@ -34,12 +34,6 @@ public class DeclarationService implements DeclarationServiceInterf {
     @Override
     public ResponseDeclarationDTO creates(RequestDeclarationDTO dto) {
         Declaration declaration = declarationMapper.toEntity(new Declaration(),dto);
-
-        if (declaration.getItens() != null) {
-            for (DeclarationItem item : declaration.getItens()) {
-                item.setDeclaration(declaration);
-            }
-        }
         return declarationMapper.toResponseDTO(repository.save(declaration));
     }
 
