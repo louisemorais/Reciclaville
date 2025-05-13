@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -22,13 +23,13 @@ public class Declaration {
     private Client client;
 
     @Column(nullable = false)
-    private Date dateOfDeclaration;
+    private LocalDate dateOfDeclaration;
 
     @Column(nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column
     private double materialTotal;

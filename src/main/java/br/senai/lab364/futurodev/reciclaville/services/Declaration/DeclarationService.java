@@ -1,15 +1,14 @@
 package br.senai.lab364.futurodev.reciclaville.services.Declaration;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationItemDTO.ResponseDeclarationItemDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperDeclaration;
 import br.senai.lab364.futurodev.reciclaville.models.Declaration;
-import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
 import br.senai.lab364.futurodev.reciclaville.repositories.DeclarationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -34,6 +33,7 @@ public class DeclarationService implements DeclarationServiceInterf {
     @Override
     public ResponseDeclarationDTO creates(RequestDeclarationDTO dto) {
         Declaration declaration = declarationMapper.toEntity(new Declaration(),dto);
+        declaration.setDateOfDeclaration(LocalDate.now());
         return declarationMapper.toResponseDTO(repository.save(declaration));
     }
 
