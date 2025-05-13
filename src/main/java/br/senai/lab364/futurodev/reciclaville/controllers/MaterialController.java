@@ -8,6 +8,8 @@ import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.ResponseMaterial
 import br.senai.lab364.futurodev.reciclaville.services.Client.ClientService;
 import br.senai.lab364.futurodev.reciclaville.services.Material.MaterialService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,30 +22,28 @@ public class MaterialController {
     private final MaterialService service;
 
     @GetMapping
-    public List<ResponseMaterialDTO> getAllClients() {
-
-        return service.findAll();
+    public ResponseEntity<List<ResponseMaterialDTO>> getAllClients() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
-    @GetMapping({"{id}"})
-    public ResponseMaterialDTO findById(@PathVariable Long id) {
 
-        return service.findById(id);
+    @GetMapping({"{id}"})
+    public ResponseEntity<ResponseMaterialDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseMaterialDTO save(@RequestBody RequestMaterialDTO dto) {
-
-        return service.creates(dto);
+    public ResponseEntity<ResponseMaterialDTO> save(@RequestBody RequestMaterialDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.creates(dto));
     }
 
     @PutMapping("{id}")
-    public  ResponseMaterialDTO update( @PathVariable Long id,@RequestBody RequestMaterialDTO dto) {
-        return service.update(id, dto);
+    public  ResponseEntity<ResponseMaterialDTO> update( @PathVariable Long id,@RequestBody RequestMaterialDTO dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, dto));
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-
+    public ResponseEntity delete(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

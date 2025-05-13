@@ -5,6 +5,8 @@ import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
 import br.senai.lab364.futurodev.reciclaville.services.Client.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,26 +19,29 @@ public class ClientController {
     private final ClientService service;
 
     @GetMapping
-    public List<ResponseClientDTO> getAllClients() {
-        return service.findAll();
+    public ResponseEntity<List<ResponseClientDTO>> getAllClients() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
+
     @GetMapping({"{id}"})
-    public ResponseClientDTO findById(@PathVariable Long id) {
-        return service.findById(id);
+    public ResponseEntity<ResponseClientDTO> findById(@PathVariable Long id) {
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseClientDTO save(@RequestBody RequestClientDTO dto) {
-        return service.creates(dto);
+    public ResponseEntity<ResponseClientDTO> save(@RequestBody RequestClientDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.creates(dto));
     }
 
     @PutMapping("{id}")
-    public  ResponseClientDTO update( @PathVariable Long id,@RequestBody RequestClientDTO dto) {
-        return service.update(id, dto);
+    public  ResponseEntity<ResponseClientDTO> update( @PathVariable Long id,@RequestBody RequestClientDTO dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.update(id, dto));
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
