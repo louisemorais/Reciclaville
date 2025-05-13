@@ -4,6 +4,7 @@ import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclar
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperDeclaration;
 import br.senai.lab364.futurodev.reciclaville.models.Declaration;
+import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
 import br.senai.lab364.futurodev.reciclaville.repositories.DeclarationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,29 @@ public class DeclarationService implements DeclarationServiceInterf {
     @Override
     public ResponseDeclarationDTO creates(RequestDeclarationDTO dto) {
         Declaration declaration = declarationMapper.toEntity(new Declaration(),dto);
+        /////////////////////////////////////////////////
+
+        //alterações com datas
         declaration.setDateOfDeclaration(LocalDate.now());
+
+        /////////////////////////////////////////////////
+
+
+        /////////////////////////////////////////////////
+
+        //Alterações relacionados ao materiais ou cálculos
+        double totalTons= 0.0;
+        double  totalCompens = 0.0;
+        for(DeclarationItem item : declaration.getItens()){
+            item.setDeclaration(declaration);
+            totalTons += item.getTonsDeclared();
+            totalCompens += item.getTonsCompensation();
+        }
+        declaration.setMaterialTotal(totalTons);
+        declaration.setCompensationTotal(totalCompens);
+
+        /////////////////////////////////////////////////
+
         return declarationMapper.toResponseDTO(repository.save(declaration));
     }
 
