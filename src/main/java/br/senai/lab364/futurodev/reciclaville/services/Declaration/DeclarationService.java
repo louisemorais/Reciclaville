@@ -5,7 +5,9 @@ import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDecla
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperDeclaration;
 import br.senai.lab364.futurodev.reciclaville.models.Declaration;
 import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
+import br.senai.lab364.futurodev.reciclaville.models.Material;
 import br.senai.lab364.futurodev.reciclaville.repositories.DeclarationRepository;
+import br.senai.lab364.futurodev.reciclaville.repositories.MaterialRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class DeclarationService implements DeclarationServiceInterf {
 
     private final DeclarationRepository repository;
+    private final MaterialRepository repositorymaterial;
     private final MapperDeclaration declarationMapper;
 
 
@@ -49,8 +52,20 @@ public class DeclarationService implements DeclarationServiceInterf {
         double  totalCompens = 0.0;
         for(DeclarationItem item : declaration.getItens()){
             item.setDeclaration(declaration);
+
+            Long materialId = item.getMaterial().getId();
+            Material material = repositorymaterial.findById(materialId).orElseThrow(() ->
+                    new RuntimeException("Material não encontrado com ID: " + materialId)
+            );
+
+            item.setMaterial(material);
+            
+            double percentCompens = item.getMaterial().getCompensationOfPercentage();
+            double compens = item.getTonsDeclared() * (percentCompens / 100);
+            item.setTonsCompensation(compens);
+
             totalTons += item.getTonsDeclared();
-            totalCompens += item.getTonsCompensation();
+            totalCompens += compens;
         }
         declaration.setMaterialTotal(totalTons);
         declaration.setCompensationTotal(totalCompens);
