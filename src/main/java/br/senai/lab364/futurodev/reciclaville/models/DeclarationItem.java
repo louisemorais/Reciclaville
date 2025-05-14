@@ -25,8 +25,8 @@ public class DeclarationItem {
     @JoinColumn(name = "material_id")
     private Material material;
 
-    @Column(nullable = false)
-    private double percentage;
+    @Column(name = "compensationOfPercentage", nullable = false)
+    private double compensationOfPercentage;
 
     @Column(nullable = false)
     private double tonsDeclared;

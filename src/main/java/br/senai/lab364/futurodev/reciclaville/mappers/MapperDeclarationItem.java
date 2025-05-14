@@ -9,12 +9,13 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {MapperMaterial.class})
 public interface MapperDeclarationItem {
 
     DeclarationItem toEntity(@MappingTarget DeclarationItem entity, RequestDeclarationItemDTO request );
 
     @Mapping(source = "declaration.id", target = "declarationId")
+    @Mapping(source = "material.compensationOfPercentage", target = "compensationOfPercentage")
     ResponseDeclarationItemDTO toResponseDTO(DeclarationItem entity);
 
     List<ResponseDeclarationItemDTO> toResponseDTO(List<DeclarationItem> entities);

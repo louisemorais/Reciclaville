@@ -7,7 +7,7 @@ import lombok.Builder;
 public record ResponseDeclarationItemDTO(Long id,
                                          Long declarationId,
                                          Material material,
-                                         Double percentage,
+                                         Double compensationOfPercentage,
                                          double tonsDeclared,
                                          double tonsCompensation) {
 }

@@ -15,9 +15,9 @@ CREATE TABLE material (
 CREATE TABLE declaration (
                              id BIGSERIAL PRIMARY KEY,
                              client_id BIGINT NOT NULL,
-                             date_of_declaration DATE NOT NULL,
-                             start_date DATE NOT NULL,
-                             end_date DATE NOT NULL,
+                             date_of_declaration TEXT NOT NULL,
+                             start_date TEXT NOT NULL,
+                             end_date TEXT NOT NULL,
                              material_total DOUBLE PRECISION,
                              compensation_total DOUBLE PRECISION,
                              CONSTRAINT fk_declaration_client FOREIGN KEY (client_id) REFERENCES client(id)
@@ -27,7 +27,7 @@ CREATE TABLE declaration_item (
                                   id BIGSERIAL PRIMARY KEY,
                                   declaration_id BIGINT NOT NULL,
                                   material_id BIGINT NOT NULL,
-                                  percentage DOUBLE PRECISION NOT NULL,
+                                  compensationOfPercentage DOUBLE PRECISION NOT NULL,
                                   tons_declared DOUBLE PRECISION NOT NULL,
                                   tons_compensation DOUBLE PRECISION NOT NULL,
                                   CONSTRAINT fk_item_declaration FOREIGN KEY (declaration_id) REFERENCES declaration(id),
