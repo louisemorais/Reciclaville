@@ -1,7 +1,7 @@
 CREATE TABLE client (
                         id BIGSERIAL PRIMARY KEY,
                         name VARCHAR(255) NOT NULL,
-                        cnpj VARCHAR(255) NOT NULL UNIQUE,
+                        cnpj VARCHAR(14) NOT NULL UNIQUE,
                         economic_activity VARCHAR(255) NOT NULL,
                         accontable VARCHAR(255) NOT NULL
 );
