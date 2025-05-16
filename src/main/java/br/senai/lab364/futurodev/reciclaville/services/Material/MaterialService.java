@@ -2,6 +2,7 @@ package br.senai.lab364.futurodev.reciclaville.services.Material;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.RequestMaterialDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.ResponseMaterialDTO;
+import br.senai.lab364.futurodev.reciclaville.errors.badRequests.MaterialBadRequestException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.MaterialNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperMaterial;
 import br.senai.lab364.futurodev.reciclaville.models.Material;
@@ -31,6 +32,7 @@ public class MaterialService implements MaterialServiceInterf{
 
     @Override
     public ResponseMaterialDTO creates(RequestMaterialDTO dto) {
+        validateMaterial(dto);
         Material material = materialMapper.toEntity(new Material(), dto);
         return materialMapper.toResponseDTO(repository.save(material));
     }
@@ -38,6 +40,7 @@ public class MaterialService implements MaterialServiceInterf{
     @Override
     public ResponseMaterialDTO update(Long id, RequestMaterialDTO dto) {
         Material material = repository.findById(id).orElseThrow(() ->  new MaterialNotFoundException(id));
+        validateMaterial(dto);
         materialMapper.toEntity(material, dto);
         return materialMapper.toResponseDTO(repository.save(material));
     }
@@ -47,4 +50,17 @@ public class MaterialService implements MaterialServiceInterf{
         Material material = repository.findById(id).orElseThrow(() ->  new MaterialNotFoundException(id));
         repository.delete(material);
     }
+
+    @Override
+    public void validateMaterial(RequestMaterialDTO dto) {
+        if (dto.name() == null || dto.name().isBlank()) {
+            throw new MaterialBadRequestException("name");
+        }
+
+        if (dto.compensationOfPercentage()== null||dto.compensationOfPercentage() <= 0) {
+            throw new MaterialBadRequestException(" compensationOfPercentage",dto.compensationOfPercentage());
+        }
+    }
+
+
 }

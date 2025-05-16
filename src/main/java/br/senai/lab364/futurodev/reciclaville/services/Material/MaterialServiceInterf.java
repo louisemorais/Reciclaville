@@ -11,4 +11,5 @@ public interface MaterialServiceInterf {
     ResponseMaterialDTO creates(RequestMaterialDTO dto);
     ResponseMaterialDTO update(Long id, RequestMaterialDTO dto);
     void delete(Long id);
+    void validateMaterial(RequestMaterialDTO dto );
 }

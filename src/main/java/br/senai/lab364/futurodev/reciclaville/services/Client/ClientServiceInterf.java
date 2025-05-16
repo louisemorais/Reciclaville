@@ -11,4 +11,5 @@ public interface ClientServiceInterf {
     ResponseClientDTO creates(RequestClientDTO dto);
     ResponseClientDTO update(Long id, RequestClientDTO dto);
     void delete(Long id);
+    void validateClient(RequestClientDTO dto);
 }

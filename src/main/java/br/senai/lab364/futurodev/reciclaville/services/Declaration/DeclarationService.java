@@ -2,7 +2,10 @@ package br.senai.lab364.futurodev.reciclaville.services.Declaration;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.errors.badRequests.DeclarationBadRequestException;
+import br.senai.lab364.futurodev.reciclaville.errors.notFounds.ClientNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.DeclarationNotFoundException;
+import br.senai.lab364.futurodev.reciclaville.errors.notFounds.MaterialNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperDeclaration;
 import br.senai.lab364.futurodev.reciclaville.models.Declaration;
 import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
@@ -10,9 +13,7 @@ import br.senai.lab364.futurodev.reciclaville.models.Material;
 import br.senai.lab364.futurodev.reciclaville.repositories.ClientRepository;
 import br.senai.lab364.futurodev.reciclaville.repositories.DeclarationRepository;
 import br.senai.lab364.futurodev.reciclaville.repositories.MaterialRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -63,32 +64,31 @@ public class DeclarationService implements DeclarationServiceInterf {
     @Override
     public void datesValidation(RequestDeclarationDTO dto, Declaration declaration) {
         declaration.setDateOfDeclaration(LocalDate.now());
-        if(dto.startDate().isAfter(dto.endDate()) || dto.endDate().isBefore(dto.startDate()))
-            throw new DataIntegrityViolationException("as datas estão erradas");
+
+        if(dto.startDate().isAfter(dto.endDate())||dto.endDate().isBefore(dto.startDate()))
+            throw new DeclarationBadRequestException("Your date");
     }
 
     @Override
     public void clientsValidation(RequestDeclarationDTO dto) {
-        if (dto.client().getId() == null || !repositoryclient.existsById(dto.client().getId())) {
-            throw new EntityNotFoundException("Cliente não encontrado com ID: " + dto.client().getId());
+        Long idClient=dto.client().getId();
+        if (idClient == null || !repositoryclient.existsById(idClient)) {
+            throw new ClientNotFoundException(idClient);
         }
     }
 
     @Override
     public void materialValidation(DeclarationItem item) {
         Long materialId = item.getMaterial().getId();
-        Material material = repositorymaterial.findById(materialId).orElseThrow(() ->
-                new RuntimeException("Material não encontrado com ID: " + materialId)
-        );
+        Material material = repositorymaterial.findById(materialId).orElseThrow(()
+                ->  new MaterialNotFoundException(materialId));
         item.setMaterial(material);
     }
 
     @Override
     public void toneladasValidation(DeclarationItem item) {
         if (item.getTonsDeclared() <= 0) {
-            throw new IllegalArgumentException(
-                    "Toneladas declaradas devem ser maiores que zero (Item ID: " + item.getId() + ")."
-            );
+            throw new DeclarationBadRequestException(item.getTonsDeclared());
 
         }
     }
