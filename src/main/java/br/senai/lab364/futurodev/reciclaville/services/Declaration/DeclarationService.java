@@ -35,7 +35,7 @@ public class DeclarationService implements DeclarationServiceInterf {
 
     @Override
     public ResponseDeclarationDTO findById(Long id) {
-        Declaration declaration = repository.findById(id).orElse(null);
+        Declaration declaration = repository.findById(id).orElseThrow();
         return declarationMapper.toResponseDTO(declaration);
     }
 

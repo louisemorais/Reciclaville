@@ -26,7 +26,7 @@ public class ClientService implements ClientServiceInterf {
 
     @Override
     public ResponseClientDTO findById(Long id) {
-        Client entity = repository.findById(id).orElse(null);
+        Client entity = repository.findById(id).orElseThrow();
         return clientMapper.toResponseDTO(entity);
     }
 
@@ -38,14 +38,14 @@ public class ClientService implements ClientServiceInterf {
 
     @Override
     public ResponseClientDTO update(Long id, RequestClientDTO dto) {
-        Client client = repository.findById(id).orElse(null);
+        Client client = repository.findById(id).orElseThrow();
         clientMapper.toEntity(client, dto);
         return clientMapper.toResponseDTO(repository.save(client));
     }
 
     @Override
     public void delete(Long id) {
-        Client client = repository.findById(id).orElse(null);
+        Client client = repository.findById(id).orElseThrow();
         repository.delete(client);
     }
 }

@@ -24,7 +24,7 @@ public class MaterialService implements MaterialServiceInterf{
 
     @Override
     public ResponseMaterialDTO findById(Long id) {
-        Material entity = repository.findById(id).orElse(null);
+        Material entity = repository.findById(id).orElseThrow();
         return materialMapper.toResponseDTO(entity);
     }
 
@@ -36,14 +36,14 @@ public class MaterialService implements MaterialServiceInterf{
 
     @Override
     public ResponseMaterialDTO update(Long id, RequestMaterialDTO dto) {
-        Material material = repository.findById(id).orElse(null);
+        Material material = repository.findById(id).orElseThrow();
         materialMapper.toEntity(material, dto);
         return materialMapper.toResponseDTO(repository.save(material));
     }
 
     @Override
     public void delete(Long id) {
-        Material material = repository.findById(id).orElse(null);
+        Material material = repository.findById(id).orElseThrow();
         repository.delete(material);
     }
 }
