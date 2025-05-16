@@ -8,7 +8,5 @@ import java.util.List;
 public record RequestDeclarationDTO(Client client,
                                     LocalDate startDate,
                                     LocalDate endDate,
-                                    double materialTotal,
-                                    double compensationTotal,
                                     List<RequestDeclarationItemDTO> itens) {
 }
