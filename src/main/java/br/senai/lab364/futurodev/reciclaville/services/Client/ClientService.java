@@ -2,6 +2,7 @@ package br.senai.lab364.futurodev.reciclaville.services.Client;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
+import br.senai.lab364.futurodev.reciclaville.errors.notFounds.ClientNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperClient;
 import br.senai.lab364.futurodev.reciclaville.models.Client;
 import br.senai.lab364.futurodev.reciclaville.repositories.ClientRepository;
@@ -26,7 +27,7 @@ public class ClientService implements ClientServiceInterf {
 
     @Override
     public ResponseClientDTO findById(Long id) {
-        Client entity = repository.findById(id).orElseThrow();
+        Client entity = repository.findById(id).orElseThrow(() ->  new ClientNotFoundException(id));
         return clientMapper.toResponseDTO(entity);
     }
 
@@ -38,14 +39,14 @@ public class ClientService implements ClientServiceInterf {
 
     @Override
     public ResponseClientDTO update(Long id, RequestClientDTO dto) {
-        Client client = repository.findById(id).orElseThrow();
+        Client client = repository.findById(id).orElseThrow(() ->  new ClientNotFoundException(id));
         clientMapper.toEntity(client, dto);
         return clientMapper.toResponseDTO(repository.save(client));
     }
 
     @Override
     public void delete(Long id) {
-        Client client = repository.findById(id).orElseThrow();
+        Client client = repository.findById(id).orElseThrow(() ->  new ClientNotFoundException(id));
         repository.delete(client);
     }
 }

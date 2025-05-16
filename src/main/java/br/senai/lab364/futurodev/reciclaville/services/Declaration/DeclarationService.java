@@ -2,6 +2,7 @@ package br.senai.lab364.futurodev.reciclaville.services.Declaration;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.errors.notFounds.DeclarationNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperDeclaration;
 import br.senai.lab364.futurodev.reciclaville.models.Declaration;
 import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
@@ -35,7 +36,7 @@ public class DeclarationService implements DeclarationServiceInterf {
 
     @Override
     public ResponseDeclarationDTO findById(Long id) {
-        Declaration declaration = repository.findById(id).orElseThrow();
+        Declaration declaration = repository.findById(id).orElseThrow(() ->  new DeclarationNotFoundException(id));
         return declarationMapper.toResponseDTO(declaration);
     }
 
@@ -53,7 +54,7 @@ public class DeclarationService implements DeclarationServiceInterf {
 
     @Override
     public void delete(Long id) {
-        Declaration declaration = repository.findById(id).orElse(null);
+        Declaration declaration = repository.findById(id).orElseThrow(() ->  new DeclarationNotFoundException(id));
         repository.delete(declaration);
     }
 

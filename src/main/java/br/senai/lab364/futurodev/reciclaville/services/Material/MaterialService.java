@@ -2,6 +2,7 @@ package br.senai.lab364.futurodev.reciclaville.services.Material;
 
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.RequestMaterialDTO;
 import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.ResponseMaterialDTO;
+import br.senai.lab364.futurodev.reciclaville.errors.notFounds.MaterialNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperMaterial;
 import br.senai.lab364.futurodev.reciclaville.models.Material;
 import br.senai.lab364.futurodev.reciclaville.repositories.MaterialRepository;
@@ -24,7 +25,7 @@ public class MaterialService implements MaterialServiceInterf{
 
     @Override
     public ResponseMaterialDTO findById(Long id) {
-        Material entity = repository.findById(id).orElseThrow();
+        Material entity = repository.findById(id).orElseThrow(() ->  new MaterialNotFoundException(id));
         return materialMapper.toResponseDTO(entity);
     }
 
@@ -36,14 +37,14 @@ public class MaterialService implements MaterialServiceInterf{
 
     @Override
     public ResponseMaterialDTO update(Long id, RequestMaterialDTO dto) {
-        Material material = repository.findById(id).orElseThrow();
+        Material material = repository.findById(id).orElseThrow(() ->  new MaterialNotFoundException(id));
         materialMapper.toEntity(material, dto);
         return materialMapper.toResponseDTO(repository.save(material));
     }
 
     @Override
     public void delete(Long id) {
-        Material material = repository.findById(id).orElseThrow();
+        Material material = repository.findById(id).orElseThrow(() ->  new MaterialNotFoundException(id));
         repository.delete(material);
     }
 }
