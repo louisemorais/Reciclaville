@@ -56,6 +56,32 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 | PUT    | `/clients/{id}`                 | Atualiza dados de um cliente existente por id |
 | DELETE | `/clients/{id}`                 | Remove um cliente por id                      |
 
+####Exemplo de requisição e resposta abaixo.
+> [!NOTE]
+> Os cnpjs são números únicos.
++ Request (application/json)
+
+    + Body
+  
+            {
+              "name": "empresas",
+              "cnpj": "050.002.089-22",
+              "economicActivity": "carro",
+              "accontable": "roberto"
+            }  
+
+    + Response 
+
+        + Body
+
+              {
+                  "id": 8,
+                  "name": "empresas",
+                  "cnpj": "050.002.089-22",
+                  "economicActivity": "carro",
+                  "accontable": "roberto"
+              }
+
 ####  Material
 | Método | Endpoint                        | Descrição                                      | 
 |--------|---------------------------------|------------------------------------------------|
@@ -65,6 +91,24 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 | PUT    | `/materials/{id}`          | Atualiza dados de um material existente por id |
 | DELETE | `/materials/{id}`          | Remove um material por id                      |
 
+####Exemplo de requisição e resposta abaixo.
+#### Request (application/json)
+```json
+{
+  "name": "papel",
+  "compensationOfPercentage": 200.0
+}  
+```   
+
+#### Response
+```json
+{
+  "id": 1, 
+  "name": "papel", 
+  "compensationOfPercentage": 200.0
+}
+```
+
 ####  Declaration
 | Método | Endpoint                        | Descrição                    |
 |--------|---------------------------------|------------------------------|
@@ -72,6 +116,53 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 | GET    | `/declarations/{id}`          | Busca uma declaração por ID  |
 | POST   | `/declarations`               | Cria uma nova declaração     |
 | DELETE | `/declarations/{id}`          | Remove uma declaração por ID |
+
+####Exemplo de requisição e resposta abaixo.
+#### Request (application/json)
+```json
+{
+  "client": {"id":1},
+  "startDate": "2000-04-15",
+  "endDate": "2090-10-05",
+  "itens": [{
+    "material": {
+      "id": 1
+    },
+    "tonsDeclared": 10.0
+  }
+  ]
+}
+```
+
+#### Response
+```json
+{
+  "id": 1,
+  "client": {
+    "id": 1
+  },
+  "dateOfDeclaration": "2025-05-16",
+  "startDate": "2000-04-15",
+  "endDate": "2010-10-05",
+  "materialTotal": 10.0,
+  "compensationTotal": 1.0,
+  "itens": [
+    {
+      "id": 1,
+      "declarationId": 1,
+      "material": {
+        "id": 7,
+        "name": "papel",
+        "compensationOfPercentage": 10.0
+      },
+      "compensationOfPercentage": 10.0,
+      "tonsDeclared": 10.0,
+      "tonsCompensation": 1.0
+    }
+  ]
+}
+```      
+
 
 ####  Dashboard
 | Método | Endpoint                        | Descrição                                                                   |
