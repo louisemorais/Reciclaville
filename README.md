@@ -70,7 +70,7 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
               "accontable": "roberto"
             }  
 
-+ Response 
++ Response (application/json)
 
     + Body
 
@@ -102,7 +102,7 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
               "compensationOfPercentage": 200.0
             }  
 
-+ Response
++ Response (application/json)
 
     + Body
 
@@ -136,7 +136,7 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
                 "tonsDeclared": 10.0
                 }]
             }
-+ Response
++ Response (application/json)
 
     + Body
 
