@@ -21,5 +21,5 @@ public class Material {
     private String name;
 
     @Column(nullable = false)
-    private double compensationOfPercentage;
+    private Double compensationOfPercentage;
 }
