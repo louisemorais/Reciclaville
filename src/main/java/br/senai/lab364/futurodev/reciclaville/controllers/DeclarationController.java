@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("declaration")
+@RequestMapping("declarations")
 @RequiredArgsConstructor
 public class DeclarationController {
     private final DeclarationService service;
