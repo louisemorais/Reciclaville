@@ -58,7 +58,7 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 
 ####Exemplo de requisição e resposta abaixo.
 > [!NOTE]
-> Os cnpjs são números únicos.
+> O CNPJ deve ser único.
 + Request (application/json)
 
     + Body
@@ -70,17 +70,17 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
               "accontable": "roberto"
             }  
 
-    + Response 
++ Response 
 
-        + Body
+    + Body
 
-              {
-                  "id": 8,
-                  "name": "empresas",
-                  "cnpj": "050.002.089-22",
-                  "economicActivity": "carro",
-                  "accontable": "roberto"
-              }
+          {
+              "id": 8,
+              "name": "empresas",
+              "cnpj": "050.002.089-22",
+              "economicActivity": "carro",
+              "accontable": "roberto"
+          }
 
 ####  Material
 | Método | Endpoint                        | Descrição                                      | 
@@ -92,22 +92,25 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 | DELETE | `/materials/{id}`          | Remove um material por id                      |
 
 ####Exemplo de requisição e resposta abaixo.
-#### Request (application/json)
-```json
-{
-  "name": "papel",
-  "compensationOfPercentage": 200.0
-}  
-```   
 
-#### Response
-```json
-{
-  "id": 1, 
-  "name": "papel", 
-  "compensationOfPercentage": 200.0
-}
-```
++ Request (application/json)
+
+    + Body
+
+            {
+              "name": "papel",
+              "compensationOfPercentage": 200.0
+            }  
+
++ Response
+
+    + Body
+
+          {
+              "id": 1,
+              "name": "papel",
+              "compensationOfPercentage": 200.0
+          }
 
 ####  Declaration
 | Método | Endpoint                        | Descrição                    |
@@ -118,50 +121,53 @@ reciclar para compensar o carbono emitido com suas embalagens e visualizar infor
 | DELETE | `/declarations/{id}`          | Remove uma declaração por ID |
 
 ####Exemplo de requisição e resposta abaixo.
-#### Request (application/json)
-```json
-{
-  "client": {"id":1},
-  "startDate": "2000-04-15",
-  "endDate": "2090-10-05",
-  "itens": [{
-    "material": {
-      "id": 1
-    },
-    "tonsDeclared": 10.0
-  }
-  ]
-}
-```
++ Request (application/json)
 
-#### Response
-```json
-{
-  "id": 1,
-  "client": {
-    "id": 1
-  },
-  "dateOfDeclaration": "2025-05-16",
-  "startDate": "2000-04-15",
-  "endDate": "2010-10-05",
-  "materialTotal": 10.0,
-  "compensationTotal": 1.0,
-  "itens": [
-    {
-      "id": 1,
-      "declarationId": 1,
-      "material": {
-        "id": 7,
-        "name": "papel",
-        "compensationOfPercentage": 10.0
-      },
-      "compensationOfPercentage": 10.0,
-      "tonsDeclared": 10.0,
-      "tonsCompensation": 1.0
-    }
-  ]
-}
-```      
+    + Body
+  
+            {
+                "client": {"id":1},
+                "startDate": "2000-04-15",
+                "endDate": "2090-10-05",
+                "itens": [{
+                "material": {
+                "id": 1
+                },
+                "tonsDeclared": 10.0
+                }]
+            }
++ Response
+
+    + Body
+
+               [{
+                    "id": 14,
+                    "client": {
+                        "id": 8,
+                        "name": "Empresas verdes",
+                        "cnpj": "050.002.089-22",
+                        "economicActivity": "carro",
+                        "accontable": "roberto"
+                    },
+                    "dateOfDeclaration": "2025-05-16",
+                    "startDate": "2000-04-15",
+                    "endDate": "2010-10-05",
+                    "materialTotal": 10.0,
+                    "compensationTotal": 1.0,
+                    "itens": [
+                        {
+                            "id": 14,
+                            "declarationId": 14,
+                            "material": {
+                                "id": 7,
+                                "name": "papel",
+                                "compensationOfPercentage": 10.0
+                            },
+                            "compensationOfPercentage": 10.0,
+                            "tonsDeclared": 10.0,
+                            "tonsCompensation": 1.0
+                    }]
+               }]
 
 
 ####  Dashboard
