@@ -1,6 +1,6 @@
 package br.senai.lab364.futurodev.reciclaville.controllers;
 
-import br.senai.lab364.futurodev.reciclaville.services.Dashboard.DashboardService;
+import br.senai.lab364.futurodev.reciclaville.services.dashboards.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

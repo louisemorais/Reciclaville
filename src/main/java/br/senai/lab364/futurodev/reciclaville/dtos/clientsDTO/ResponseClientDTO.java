@@ -1,4 +1,4 @@
-package br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO;
+package br.senai.lab364.futurodev.reciclaville.dtos.clientsDTO;
 
 import lombok.Data;
 

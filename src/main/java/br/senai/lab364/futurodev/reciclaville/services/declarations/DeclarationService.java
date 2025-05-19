@@ -1,7 +1,7 @@
-package br.senai.lab364.futurodev.reciclaville.services.Declaration;
+package br.senai.lab364.futurodev.reciclaville.services.declarations;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclarationDTO;
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationDTOs.RequestDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationDTOs.ResponseDeclarationDTO;
 import br.senai.lab364.futurodev.reciclaville.errors.badRequests.DeclarationBadRequestException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.ClientNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.DeclarationNotFoundException;
@@ -24,8 +24,8 @@ import java.util.List;
 public class DeclarationService implements DeclarationServiceInterf {
 
     private final DeclarationRepository repository;
-    private final MaterialRepository repositorymaterial;
-    private final ClientRepository repositoryclient;
+    private final MaterialRepository repositoryMaterial;
+    private final ClientRepository repositoryClient;
     private final MapperDeclaration declarationMapper;
 
 
@@ -45,8 +45,8 @@ public class DeclarationService implements DeclarationServiceInterf {
     public ResponseDeclarationDTO creates(RequestDeclarationDTO dto) {
         Declaration declaration = declarationMapper.toEntity(new Declaration(),dto);
 
-        clientsValidation(dto);
-        datesValidation(dto, declaration);
+        validateClient(dto);
+        validateDates(dto, declaration);
         totalTons(declaration);
         totalCompensation(declaration);
 
@@ -62,7 +62,7 @@ public class DeclarationService implements DeclarationServiceInterf {
     ////////////////////////////////////// VALIDAÇÕES //////////////////////////////////////////////////////////////////
 
     @Override
-    public void datesValidation(RequestDeclarationDTO dto, Declaration declaration) {
+    public void validateDates(RequestDeclarationDTO dto, Declaration declaration) {
         declaration.setDateOfDeclaration(LocalDate.now());
 
         if(dto.startDate().isAfter(dto.endDate())||dto.endDate().isBefore(dto.startDate()))
@@ -70,23 +70,23 @@ public class DeclarationService implements DeclarationServiceInterf {
     }
 
     @Override
-    public void clientsValidation(RequestDeclarationDTO dto) {
+    public void validateClient(RequestDeclarationDTO dto) {
         Long idClient=dto.client().getId();
-        if (idClient == null || !repositoryclient.existsById(idClient)) {
+        if (idClient == null || !repositoryClient.existsById(idClient)) {
             throw new ClientNotFoundException(idClient);
         }
     }
 
     @Override
-    public void materialValidation(DeclarationItem item) {
+    public void validateMaterial(DeclarationItem item) {
         Long materialId = item.getMaterial().getId();
-        Material material = repositorymaterial.findById(materialId).orElseThrow(()
+        Material material = repositoryMaterial.findById(materialId).orElseThrow(()
                 ->  new MaterialNotFoundException(materialId));
         item.setMaterial(material);
     }
 
     @Override
-    public void toneladasValidation(DeclarationItem item) {
+    public void validateTons(DeclarationItem item) {
         if (item.getTonsDeclared() <= 0) {
             throw new DeclarationBadRequestException(item.getTonsDeclared());
 
@@ -99,7 +99,7 @@ public class DeclarationService implements DeclarationServiceInterf {
         for(DeclarationItem item : declaration.getItens()){
             item.setDeclaration(declaration);
 
-            toneladasValidation(item);
+            validateTons(item);
 
             totalTons += item.getTonsDeclared();
         }
@@ -112,7 +112,7 @@ public class DeclarationService implements DeclarationServiceInterf {
         for(DeclarationItem item : declaration.getItens()){
             item.setDeclaration(declaration);
 
-            materialValidation(item);
+            validateMaterial(item);
 
             double percentCompens = item.getMaterial().getCompensationOfPercentage();
             double compens = item.getTonsDeclared() * (percentCompens / 100);

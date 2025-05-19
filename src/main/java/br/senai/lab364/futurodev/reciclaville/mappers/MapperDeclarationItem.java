@@ -1,7 +1,7 @@
 package br.senai.lab364.futurodev.reciclaville.mappers;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationItemDTO.RequestDeclarationItemDTO;
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationItemDTO.ResponseDeclarationItemDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationItemDTOs.RequestDeclarationItemDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationItemDTOs.ResponseDeclarationItemDTO;
 import br.senai.lab364.futurodev.reciclaville.models.DeclarationItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

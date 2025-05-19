@@ -1,4 +1,4 @@
-package br.senai.lab364.futurodev.reciclaville.dtos.DeclarationItemDTO;
+package br.senai.lab364.futurodev.reciclaville.dtos.declarationItemDTOs;
 
 import br.senai.lab364.futurodev.reciclaville.models.Material;
 import lombok.Builder;

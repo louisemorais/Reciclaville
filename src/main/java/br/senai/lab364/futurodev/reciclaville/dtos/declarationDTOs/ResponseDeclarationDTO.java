@@ -1,6 +1,6 @@
-package br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO;
+package br.senai.lab364.futurodev.reciclaville.dtos.declarationDTOs;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationItemDTO.ResponseDeclarationItemDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationItemDTOs.ResponseDeclarationItemDTO;
 import br.senai.lab364.futurodev.reciclaville.models.Client;
 
 import java.time.LocalDate;

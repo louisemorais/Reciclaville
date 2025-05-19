@@ -1,7 +1,7 @@
-package br.senai.lab364.futurodev.reciclaville.services.Material;
+package br.senai.lab364.futurodev.reciclaville.services.materials;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.RequestMaterialDTO;
-import br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO.ResponseMaterialDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.materialsDTOs.RequestMaterialDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.materialsDTOs.ResponseMaterialDTO;
 import br.senai.lab364.futurodev.reciclaville.errors.badRequests.MaterialBadRequestException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.MaterialNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperMaterial;
@@ -61,6 +61,4 @@ public class MaterialService implements MaterialServiceInterf{
             throw new MaterialBadRequestException(" compensationOfPercentage",dto.compensationOfPercentage());
         }
     }
-
-
 }

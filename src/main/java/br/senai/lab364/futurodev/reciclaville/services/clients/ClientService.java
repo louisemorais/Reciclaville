@@ -1,7 +1,7 @@
-package br.senai.lab364.futurodev.reciclaville.services.Client;
+package br.senai.lab364.futurodev.reciclaville.services.clients;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.RequestClientDTO;
-import br.senai.lab364.futurodev.reciclaville.dtos.ClientsDTO.ResponseClientDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.clientsDTO.RequestClientDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.clientsDTO.ResponseClientDTO;
 import br.senai.lab364.futurodev.reciclaville.errors.badRequests.ClientBadRequestException;
 import br.senai.lab364.futurodev.reciclaville.errors.notFounds.ClientNotFoundException;
 import br.senai.lab364.futurodev.reciclaville.mappers.MapperClient;

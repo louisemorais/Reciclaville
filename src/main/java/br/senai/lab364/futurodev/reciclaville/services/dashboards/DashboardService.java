@@ -1,4 +1,4 @@
-package br.senai.lab364.futurodev.reciclaville.services.Dashboard;
+package br.senai.lab364.futurodev.reciclaville.services.dashboards;
 import br.senai.lab364.futurodev.reciclaville.repositories.DeclarationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

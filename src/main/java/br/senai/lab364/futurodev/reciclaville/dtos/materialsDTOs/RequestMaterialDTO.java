@@ -1,6 +1,4 @@
-package br.senai.lab364.futurodev.reciclaville.dtos.MaterialsDTO;
-
-import jakarta.persistence.Column;
+package br.senai.lab364.futurodev.reciclaville.dtos.materialsDTOs;
 
 public record RequestMaterialDTO(String name,
                                  Double compensationOfPercentage){

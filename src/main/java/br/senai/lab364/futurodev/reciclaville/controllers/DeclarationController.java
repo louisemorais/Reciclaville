@@ -1,8 +1,8 @@
 package br.senai.lab364.futurodev.reciclaville.controllers;
 
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.RequestDeclarationDTO;
-import br.senai.lab364.futurodev.reciclaville.dtos.DeclarationsDTO.ResponseDeclarationDTO;
-import br.senai.lab364.futurodev.reciclaville.services.Declaration.DeclarationService;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationDTOs.RequestDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.dtos.declarationDTOs.ResponseDeclarationDTO;
+import br.senai.lab364.futurodev.reciclaville.services.declarations.DeclarationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
