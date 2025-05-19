@@ -5,7 +5,7 @@ public class MaterialBadRequestException extends BadRequestException {
         super("Material",attribute);
     }
     public MaterialBadRequestException(String attribute,Double compensationOfPercentage) {
-        super("Material", attribute +" (valor informado: "
+        super("Material", attribute +" (value reported: "
                 + compensationOfPercentage + ")");
     }
 }

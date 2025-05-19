@@ -5,7 +5,7 @@ public class DeclarationBadRequestException extends BadRequestException {
         super("Declaration", attribute);
     }
     public DeclarationBadRequestException(Double tonsDeclared) {
-        super("DeclarationItem", "(valor informado: "
+        super("DeclarationItem", "(value reported: "
                 + tonsDeclared + ")");
     }
 }

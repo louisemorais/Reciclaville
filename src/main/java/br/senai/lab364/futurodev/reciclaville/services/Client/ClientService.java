@@ -56,18 +56,19 @@ public class ClientService implements ClientServiceInterf {
     @Override
     public void validateClient(RequestClientDTO dto) {
         if (dto.getName() == null || dto.getName().isBlank()) {
-            throw new ClientBadRequestException("nome");
+            throw new ClientBadRequestException("nome", dto.getName());
         }
 
         if (dto.getCnpj() == null || dto.getCnpj().isBlank()) {
-            throw new ClientBadRequestException("cpf");
-        }
-        if (dto.getAccontable() == null || dto.getAccontable().isBlank()) {
-            throw new ClientBadRequestException("accontable");
+            throw new ClientBadRequestException("cnpj",dto.getCnpj());
         }
 
+        repository.findByCnpj(dto.getCnpj()).ifPresent(client -> {
+            throw new ClientBadRequestException("cnpj", dto.getCnpj(), " already exists");
+        });
+
         if (dto.getEconomicActivity() == null || dto.getEconomicActivity() .isBlank()) {
-            throw new ClientBadRequestException("economicActivity");
+            throw new ClientBadRequestException("economicActivity", dto.getEconomicActivity());
         }
     }
 }

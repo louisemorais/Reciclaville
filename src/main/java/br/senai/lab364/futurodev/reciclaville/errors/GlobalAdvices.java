@@ -45,7 +45,7 @@ public class GlobalAdvices{
     public ResponseEntity<ResponseErrorDTO> handle(HttpMessageNotReadableException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseErrorDTO(
                 "400",
-                "Erro de leitura do corpo da requisição. Verifique o JSON enviado.",
+                "Error reading the request body. Check the JSON sent.",
                 e.getCause() != null ? e.getCause().getMessage() : null,
                 e.getClass().getName()
         ));
